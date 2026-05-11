@@ -11,32 +11,57 @@ import {
 import { motion } from "framer-motion";
 
 const data = [
-  { day: "Mon", users: 190 },
-  { day: "Tue", users: 310 },
-  { day: "Wed", users: 240 },
-  { day: "Thu", users: 80 },
-  { day: "Fri", users: 210 },
-  { day: "Sat", users: 215 },
-  { day: "Sun", users: 185 },
+  { month: "Jan", users: 190 },
+  { month: "Feb", users: 310 },
+  { month: "Mar", users: 240 },
+  { month: "Apr", users: 80 },
+  { month: "May", users: 210 },
+  { month: "Jun", users: 215 },
+  { month: "Jul", users: 185 },
+  { month: "Aug", users: 165 },
+  { month: "Sep", users: 125 },
+  { month: "Oct", users: 135 },
+  { month: "Nov", users: 155 },
+  { month: "Dec", users: 205 },
 ];
 
-const CustomTooltip = ({ active, payload, label }) => {
-  if (active && payload && payload.length) {
+const CustomTooltip = ({
+  active,
+  payload,
+  label,
+}) => {
+  if (
+    active &&
+    payload &&
+    payload.length
+  ) {
     return (
       <div className="
-        bg-[#111111]
+        bg-[#1E1E1E]
+        rounded-xl
         px-3
         py-2
-        rounded-xl
         shadow-xl
+        border
+        border-[#2d2d2d]
+        min-w-[90px]
       ">
 
-        <p className="text-[#F5C518] text-xs font-medium mb-1">
+        <p className="
+          text-white
+          text-[13px]
+          font-semibold
+          mb-[2px]
+        ">
           {label}
         </p>
 
-        <p className="text-white text-sm font-semibold">
-          {payload[0].value} Users
+        <p className="
+          text-[#F5C518]
+          text-[12px]
+          font-medium
+        ">
+          Users : {payload[0].value}
         </p>
 
       </div>
@@ -49,19 +74,14 @@ const CustomTooltip = ({ active, payload, label }) => {
 const ActiveUsersChart = () => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      whileHover={{ y: -3 }}
+      whileHover={{ y: -2 }}
       className="
         bg-white
         border
         border-gray-200
         rounded-2xl
         p-4
-        md:p-5
         shadow-sm
-        hover:shadow-lg
         transition-all
         duration-300
       "
@@ -72,20 +92,22 @@ const ActiveUsersChart = () => {
         flex
         items-center
         justify-between
-        gap-3
-        flex-wrap
         mb-6
       ">
 
-        <h2 className="text-[18px] font-semibold text-[#111111]">
+        <h2 className="
+          text-[18px]
+          font-semibold
+          text-[#111111]
+        ">
           Active Users Over Time
         </h2>
 
         <button className="
-          text-sm
-          text-gray-400
           border
           border-gray-200
+          text-gray-400
+          text-sm
           px-4
           py-2
           rounded-lg
@@ -93,15 +115,21 @@ const ActiveUsersChart = () => {
           transition-all
           duration-300
         ">
-          This Month
+          This Year
         </button>
 
       </div>
 
       {/* Chart */}
-      <div className="w-full h-[260px] md:h-[320px]">
+      <div className="
+        w-full
+        h-[300px]
+      ">
 
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer
+          width="100%"
+          height="100%"
+        >
 
           <LineChart
             data={data}
@@ -121,24 +149,23 @@ const ActiveUsersChart = () => {
 
             {/* X Axis */}
             <XAxis
-              dataKey="day"
-              tick={{
-                fontSize: 12,
-                fill: "#9ca3af",
-              }}
+              dataKey="month"
               axisLine={false}
               tickLine={false}
+              tick={{
+                fontSize: 12,
+                fill: "#8a8a8a",
+              }}
             />
 
             {/* Y Axis */}
             <YAxis
-              tick={{
-                fontSize: 12,
-                fill: "#9ca3af",
-              }}
               axisLine={false}
               tickLine={false}
-              domain={[0, 400]}
+              tick={{
+                fontSize: 12,
+                fill: "#8a8a8a",
+              }}
               ticks={[0, 100, 200, 300, 400]}
             />
 
@@ -146,42 +173,30 @@ const ActiveUsersChart = () => {
             <Tooltip
               content={<CustomTooltip />}
               cursor={{
-                stroke: "#F5C518",
-                strokeDasharray: "4 4",
+                stroke: "#d4d4d4",
+                strokeWidth: 1,
               }}
             />
 
-            {/* Glow Shadow Line */}
+            {/* Line */}
             <Line
               type="monotone"
               dataKey="users"
-              stroke="#F5C518"
-              strokeWidth={10}
-              opacity={0.12}
-              dot={false}
-              activeDot={false}
-              animationDuration={1600}
-            />
-
-            {/* Main Line */}
-            <Line
-              type="monotone"
-              dataKey="users"
-              stroke="#F5C518"
-              strokeWidth={3}
+              stroke="#EAB308"
+              strokeWidth={2.5}
               dot={{
                 r: 5,
                 fill: "#ffffff",
-                stroke: "#F5C518",
+                stroke: "#EAB308",
                 strokeWidth: 2,
               }}
               activeDot={{
-                r: 7,
-                fill: "#ffffff",
-                stroke: "#F5C518",
-                strokeWidth: 3,
+                r: 6,
+                fill: "#EAB308",
+                stroke: "#ffffff",
+                strokeWidth: 2,
               }}
-              animationDuration={1800}
+              animationDuration={1500}
             />
 
           </LineChart>

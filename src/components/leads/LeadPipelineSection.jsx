@@ -1,25 +1,32 @@
 import LeadPipelineColumn from "./LeadPipelineColumn";
 
-import { leadsData } from "../../data/leadsData";
+const LeadPipelineSection = ({
+  leadsData,
+}) => {
 
-const LeadPipelineSection = () => {
   return (
     <div
       className="
-        flex
+        grid
+        grid-cols-1
+        md:grid-cols-2
+        xl:grid-cols-3
         gap-5
-        overflow-x-auto
-        pb-2
-        scrollbar-hide
       "
     >
 
-      {leadsData.map((item) => (
-        <LeadPipelineColumn
-          key={item.id}
-          {...item}
-        />
-      ))}
+      {leadsData.map((stageData) =>
+
+        stageData.leads.map((lead) => (
+
+          <LeadPipelineColumn
+            key={lead.id}
+            lead={lead}
+            stage={stageData.stage}
+          />
+
+        ))
+      )}
 
     </div>
   );
