@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 // import Dashboard from "./Pages/Dashboard";
-import Subscription from "./Pages/Subscription";
-import CustomerPage from "./Pages/Customer";
+import Subscription from "./Pages/SubscriptionPage";
+import CustomerPage from "./Pages/CustomerPage";
 // import LeadPage from "./Pages/Lead";
 
 
