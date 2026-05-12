@@ -1,226 +1,199 @@
-import {
-  FiSearch,
-  FiFilter,
-} from "react-icons/fi";
+import { useState, useRef, useEffect } from "react";
+import { FiSearch, FiFilter, FiCheck } from "react-icons/fi";
 
 const stages = [
-  {
-    label: "New",
-    count: 12,
-  },
-
-  {
-    label: "Contacted",
-    count: 8,
-  },
-
-  {
-    label: "Qualified",
-    count: 6,
-  },
-
-  {
-    label: "Proposal",
-    count: 4,
-  },
-
-  {
-    label: "Won",
-    count: 3,
-  },
+  { label: "New",       count: 12 },
+  { label: "Contacted", count: 8  },
+  { label: "Qualified", count: 6  },
+  { label: "Proposal",  count: 4  },
+  { label: "Won",       count: 3  },
+  { label: "Lost",      count: 2  },
 ];
+
+const plans = ["All", "Basic", "Premium", "Advance"];
 
 const LeadFilterBar = ({
   searchTerm,
   setSearchTerm,
   activeStage,
   setActiveStage,
+  activePlan,
+  setActivePlan,
 }) => {
+  const [showFilter, setShowFilter] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setShowFilter(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
-    <div className="mt-6 mb-7">
+    <div className="mt-4 sm:mt-6 mb-5 sm:mb-7">
 
       {/* TOOLBAR */}
-      <div
-        className="
-          flex
-          flex-col
-          lg:flex-row
-          lg:items-center
-          gap-3
-          mb-5
-        "
-      >
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-4 sm:mb-5">
 
         {/* SEARCH */}
-        <div
-          className="
-            flex
-            items-center
-            gap-3
-            h-[46px]
-            sm:h-[50px]
-            px-4
-            rounded-xl
-            border
-            border-gray-200
-            bg-white
-            flex-1
-          "
-        >
-
-          <FiSearch className="text-gray-400 text-[18px]" />
-
+        <div className="
+          flex items-center gap-2 sm:gap-3
+          h-[42px] sm:h-[46px] md:h-[50px]
+          px-3 sm:px-4 rounded-xl
+          border border-gray-200 bg-white flex-1
+        ">
+          <FiSearch className="text-gray-400 text-[16px] sm:text-[18px] shrink-0" />
           <input
             type="text"
             placeholder="Search leads..."
             value={searchTerm}
-            onChange={(e) =>
-              setSearchTerm(e.target.value)
-            }
+            onChange={(e) => setSearchTerm(e.target.value)}
             className="
-              flex-1
-              bg-transparent
-              outline-none
-              text-sm
-              text-gray-700
+              flex-1 bg-transparent outline-none
+              text-sm text-gray-700
               placeholder:text-gray-400
             "
           />
-
         </div>
 
         {/* RIGHT BUTTONS */}
-        <div
-          className="
-            flex
-            items-center
-            gap-3
-            lg:w-auto
-            w-full
-          "
-        >
+        <div className="flex items-center gap-2 sm:gap-3">
 
           {/* ADD BUTTON */}
-          <button
-            className="
-              flex-1
-              lg:flex-none
-              h-[44px]
-              sm:h-[48px]
-              lg:px-6
-              px-4
-              rounded-xl
-              bg-[#F5C518]
-              text-black
-              text-sm
-              font-semibold
-              shadow-sm
-              hover:bg-[#e4b700]
-              transition-all
-              duration-300
-              whitespace-nowrap
-            "
-          >
-
+          <button className="
+            flex-1 sm:flex-none
+            h-[40px] sm:h-[44px] md:h-[48px]
+            px-4 sm:px-5 md:px-6
+            rounded-xl
+            bg-[#F5C518] text-black
+            text-[13px] sm:text-sm font-semibold
+            shadow-sm hover:bg-[#e4b700]
+            transition-all duration-300 whitespace-nowrap
+          ">
             + Add Lead
-
           </button>
 
-          {/* FILTER BUTTON */}
-          <button
-            className="
-              flex-1
-              lg:flex-none
-              h-[44px]
-              sm:h-[48px]
-              lg:px-5
-              px-4
-              rounded-xl
-              border
-              border-gray-200
-              bg-white
-              flex
-              items-center
-              justify-center
-              gap-2
-              text-sm
-              font-medium
-              text-gray-700
-              hover:bg-gray-50
-              transition-all
-              duration-300
-              whitespace-nowrap
-            "
-          >
+          {/* FILTER BUTTON + DROPDOWN */}
+          <div className="relative flex-1 sm:flex-none" ref={dropdownRef}>
+            <button
+              onClick={() => setShowFilter(!showFilter)}
+              className={`
+                w-full
+                h-[40px] sm:h-[44px] md:h-[48px]
+                px-4 sm:px-5
+                rounded-xl border
+                flex items-center justify-center gap-2
+                text-[13px] sm:text-sm font-medium
+                transition-all duration-300 whitespace-nowrap
+                ${showFilter
+                  ? "bg-[#F5C518] border-[#F5C518] text-black"
+                  : "border-gray-200 bg-white text-gray-700 hover:bg-gray-50"
+                }
+              `}
+            >
+              <FiFilter className="text-[14px] sm:text-[16px]" />
+              Filters
+              {activePlan !== "All" && (
+                <span className="
+                  ml-1 px-1.5 sm:px-2 py-0.5
+                  bg-black text-white
+                  text-[9px] sm:text-[10px] font-bold rounded-full
+                ">
+                  1
+                </span>
+              )}
+            </button>
 
-            <FiFilter className="text-[16px]" />
+            {/* DROPDOWN — fixed to open on left side */}
+            {showFilter && (
+              <div className="
+                absolute right-0 top-[48px] sm:top-[52px]
+                w-[160px] sm:w-[180px]
+                bg-white border border-gray-200
+                rounded-2xl shadow-lg z-50
+                overflow-hidden py-2
+              ">
+                {plans.map((plan) => (
+                  <button
+                    key={plan}
+                    onClick={() => {
+                      setActivePlan(plan);
+                      setShowFilter(false);
+                    }}
+                    className={`
+                      w-full px-3 sm:px-4 py-2 sm:py-2.5
+                      flex items-center justify-between
+                      text-[13px] sm:text-sm font-medium
+                      transition-all duration-200
+                      ${activePlan === plan
+                        ? "bg-[#FFF9E0] text-[#C89B00]"
+                        : "text-gray-700 hover:bg-[#FFFBF0]"
+                      }
+                    `}
+                  >
+                    <span>{plan}</span>
+                    {activePlan === plan && (
+                      <FiCheck className="text-[#F5C518] text-[13px] sm:text-[14px]" />
+                    )}
+                  </button>
+                ))}
 
-            Filters
-
-          </button>
-
+                {activePlan !== "All" && (
+                  <div className="border-t border-gray-100 px-3 sm:px-4 py-2 mt-1">
+                    <button
+                      onClick={() => {
+                        setActivePlan("All");
+                        setShowFilter(false);
+                      }}
+                      className="
+                        text-[11px] sm:text-[12px]
+                        text-red-400 hover:text-red-600
+                        font-medium transition-all
+                      "
+                    >
+                      Clear filter
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         </div>
-
       </div>
 
       {/* STAGE TABS */}
-      <div
-        className="
-          flex
-          items-center
-          gap-3
-          overflow-x-auto
-          pb-2
-          scrollbar-hide
-        "
-      >
-
+      <div className="
+        flex items-center gap-2 sm:gap-3
+        overflow-x-auto pb-2 scrollbar-hide
+      ">
         {stages.map((stage) => (
-
           <button
             key={stage.label}
-            onClick={() =>
-              setActiveStage(stage.label)
-            }
+            onClick={() => setActiveStage(stage.label)}
             className={`
-              h-[42px]
-              px-5
-              rounded-full
-              border
-              flex
-              items-center
-              gap-2
+              h-[36px] sm:h-[40px] md:h-[42px]
+              px-3 sm:px-4 md:px-5
+              rounded-full border
+              flex items-center gap-1.5 sm:gap-2
               whitespace-nowrap
-              text-sm
-              font-semibold
-              transition-all
-              duration-300
-              shrink-0
-
-              ${
-                activeStage === stage.label
-                  ? "bg-[#F5C518] border-[#F5C518] text-black shadow-sm"
-                  : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"
+              text-[12px] sm:text-sm font-semibold
+              transition-all duration-300 shrink-0
+              ${activeStage === stage.label
+                ? "bg-[#F5C518] border-[#F5C518] text-black shadow-sm"
+                : "bg-white border-gray-200 text-gray-600 hover:bg-[#FFFBF0] hover:border-[#F5C518]"
               }
             `}
           >
-
             {stage.label}
-
-            <span
-              className="
-                text-[12px]
-                opacity-70
-              "
-            >
+            <span className="text-[10px] sm:text-[12px] opacity-70">
               {stage.count}
             </span>
-
           </button>
-
         ))}
-
       </div>
 
     </div>

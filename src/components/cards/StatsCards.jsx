@@ -1,7 +1,13 @@
 import { motion } from "framer-motion";
-import { FiUsers } from "react-icons/fi";
+import { FiUsers, FiTrendingUp } from "react-icons/fi";
 
 const cards = [
+  {
+    title: "Total Customers",
+    value: "9,860",
+    subtitle: "this Month",
+    growth: "+4.6%",
+  },
   {
     title: "Active Users",
     value: "2,438",
@@ -9,132 +15,99 @@ const cards = [
     growth: "+4.6%",
   },
   {
-    title: "Deactive User",
+    title: "Inactive User",
     value: "412",
     subtitle: "-23 this week",
-    growth: "+4.6%",
-  },
-  {
-    title: "Total Customers",
-    value: "9,860",
-    subtitle: "this Month",
     growth: "+4.6%",
   },
 ];
 
 const StatsCards = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-5">
-
+    <div className="
+      grid grid-cols-1
+      sm:grid-cols-2
+      lg:grid-cols-3
+      gap-3 sm:gap-4
+    ">
       {cards.map((card, index) => (
         <motion.div
           key={card.title}
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.4,
-            delay: index * 0.1,
-          }}
-          whileHover={{
-            y: -5,
-          }}
+          transition={{ duration: 0.4, delay: index * 0.1 }}
+          whileHover={{ y: -5 }}
           className="
-            relative
-            bg-white
-            border
-            border-gray-200
-            rounded-2xl
-            p-4 md:p-5
-            overflow-hidden
-            shadow-sm
-            hover:shadow-xl
+            relative bg-white
+            border border-gray-200
+            rounded-2xl p-4
+            shadow-sm hover:shadow-xl
             hover:border-[#F5C518]
-            transition-all
-            duration-300
-            cursor-pointer
+            transition-all duration-300
+            cursor-pointer overflow-hidden
           "
         >
 
           {/* Top */}
-          <div className="flex items-center justify-between mb-4 md:mb-5">
-
-            <span className="text-sm md:text-[15px] font-medium text-gray-500">
+          <div className="flex items-center justify-between mb-3">
+            <span className="
+              text-[12px] sm:text-[13px] md:text-[14px]
+              font-medium text-gray-500 leading-tight
+            ">
               {card.title}
             </span>
 
-            {/* Icon */}
             <div className="
-              w-[36px] md:w-[38px]
-              h-[36px] md:h-[38px]
-              rounded-full
-              bg-gradient-to-br
-              from-orange-300
-              to-orange-400
-              flex
-              items-center
-              justify-center
-              shadow-md
+              w-[32px] sm:w-[34px] md:w-[36px]
+              h-[32px] sm:h-[34px] md:h-[36px]
+              rounded-full bg-yellow-50
+              flex items-center justify-center
+              shrink-0 ml-2
             ">
-
-              <FiUsers className="text-white text-base md:text-lg" />
+              <FiUsers className="text-[#F5C518] text-sm sm:text-base" />
             </div>
           </div>
 
-          {/* Number */}
+          {/* Number — smaller */}
           <h2 className="
-            text-[30px]
-            sm:text-[34px]
-            md:text-[38px]
-            font-extrabold
-            text-[#111111]
-            leading-none
-            tracking-tight
-            mb-4 md:mb-5
+            text-[22px] sm:text-[26px] md:text-[28px]
+            font-extrabold text-[#111111]
+            leading-none tracking-tight
+            mb-3
           ">
             {card.value}
           </h2>
 
           {/* Bottom */}
-          <div className="flex items-center justify-between gap-3">
-
-            <span className="text-[12px] md:text-[13px] text-gray-400">
+          <div className="flex items-center justify-between gap-2">
+            <span className="text-[11px] sm:text-[12px] text-gray-400">
               {card.subtitle}
             </span>
 
-            {/* Growth Badge */}
+            {/* Growth Badge — smaller */}
             <div className="
-              px-2 md:px-3
-              py-1
+              flex items-center gap-0.5
+              px-1.5 py-0.5
               rounded-full
-              bg-green-100
-              text-green-600
-              text-[10px] md:text-[11px]
-              font-bold
-              whitespace-nowrap
+              bg-green-100 text-green-600
+              text-[9px] sm:text-[10px]
+              font-bold whitespace-nowrap
             ">
-
-              ▲ {card.growth}
+              <FiTrendingUp size={8} />
+              {card.growth}
             </div>
           </div>
 
           {/* Bottom Hover Line */}
           <div className="
-            absolute
-            bottom-0
-            left-0
-            w-0
-            h-[3px]
-            bg-gradient-to-r
-            from-[#F5C518]
-            to-yellow-300
-            hover:w-full
-            transition-all
-            duration-500
+            absolute bottom-0 left-0
+            w-0 h-[3px]
+            bg-gradient-to-r from-[#F5C518] to-yellow-300
+            hover:w-full transition-all duration-500
           "></div>
 
         </motion.div>
       ))}
-
     </div>
   );
 };

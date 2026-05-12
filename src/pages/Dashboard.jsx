@@ -13,9 +13,6 @@ const Dashboard = () => {
           Dashboard
         </h1>
 
-        <p className="text-gray-500 mt-1 text-sm">
-          Welcome back to your analytics dashboard.
-        </p>
       </div>
 
       {/* Stats Cards */}

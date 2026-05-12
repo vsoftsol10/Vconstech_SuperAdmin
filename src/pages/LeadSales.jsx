@@ -1,105 +1,55 @@
 import { useState } from "react";
-
 import LeadStatsSection from "../components/leads/LeadStatsSection";
-
 import LeadFilterBar from "../components/leads/LeadFilterBar";
-
 import LeadPipelineSection from "../components/leads/LeadPipelineSection";
-
 import { leadsData } from "../data/leadsData";
 
 const LeadSales = () => {
+  const [searchTerm,  setSearchTerm]  = useState("");
+  const [activeStage, setActiveStage] = useState("New");
+  const [activePlan,  setActivePlan]  = useState("All");
 
-  // SEARCH
-  const [searchTerm, setSearchTerm] =
-    useState("");
+  const filteredLeads = leadsData
+    .map((stageData) => ({
+      ...stageData,
+      leads: stageData.leads.filter((lead) => {
+        const matchesSearch =
+          lead.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          lead.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          lead.phone.includes(searchTerm);
 
-  // ACTIVE STAGE
-  const [activeStage, setActiveStage] =
-    useState("New");
+        // ALWAYS filter by active stage tab first
+        const matchesStage = stageData.stage === activeStage;
 
-  // FILTERED DATA
-  const filteredLeads =
-    leadsData
-      .map((stageData) => ({
+        // THEN also filter by plan if selected
+        const matchesPlan =
+          activePlan === "All" || lead.plan === activePlan;
 
-        ...stageData,
-
-        leads: stageData.leads.filter(
-          (lead) => {
-
-            const matchesSearch =
-              lead.name
-                .toLowerCase()
-                .includes(
-                  searchTerm.toLowerCase()
-                ) ||
-
-              lead.email
-                .toLowerCase()
-                .includes(
-                  searchTerm.toLowerCase()
-                ) ||
-
-              lead.phone.includes(
-                searchTerm
-              );
-
-            const matchesStage =
-              activeStage ===
-                stageData.stage;
-
-            return (
-              matchesSearch &&
-              matchesStage
-            );
-          }
-        ),
-      }))
-      .filter(
-        (stage) =>
-          stage.stage === activeStage
-      );
+        return matchesSearch && matchesStage && matchesPlan;
+      }),
+    }))
+    // only keep the active stage
+    .filter((stage) => stage.stage === activeStage);
 
   return (
-    <div
-      className="
-        w-full
-        min-h-screen
-      "
-    >
+    <div className="space-y-6">
 
-      {/* PAGE CONTAINER */}
-      <div
-        className="
-          bg-[#FAFAFA]
-          border
-          border-gray-200
-          rounded-[28px]
-          p-4
-          sm:p-5
-          md:p-6
-          lg:p-7
-        "
-      >
-
-        {/* STATS */}
-        <LeadStatsSection />
-
-        {/* FILTER BAR */}
-        <LeadFilterBar
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          activeStage={activeStage}
-          setActiveStage={setActiveStage}
-        />
-
-        {/* LEADS GRID */}
-        <LeadPipelineSection
-          leadsData={filteredLeads}
-        />
-
+      <div>
+        <h1 className="text-[32px] font-bold text-[#111111]">Lead</h1>
       </div>
+
+      <LeadStatsSection />
+
+      <LeadFilterBar
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        activeStage={activeStage}
+        setActiveStage={setActiveStage}
+        activePlan={activePlan}
+        setActivePlan={setActivePlan}
+      />
+
+      <LeadPipelineSection leadsData={filteredLeads} />
 
     </div>
   );

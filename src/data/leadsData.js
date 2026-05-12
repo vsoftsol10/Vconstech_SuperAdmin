@@ -3,7 +3,6 @@ export const leadsData = [
     id: 1,
     stage: "New",
     count: 12,
-
     leads: [
       {
         id: 101,
@@ -11,25 +10,22 @@ export const leadsData = [
         company: "Construction",
         email: "Sandy@gmail.com",
         phone: "6248763864",
-        plan: "Basic Plan",
+        plan: "Basic",
       },
-
       {
         id: 102,
-        name: "Marcus Tate",
-        company: "Construction",
-        email: "Sandy@gmail.com",
-        phone: "6248763864",
-        plan: "Basic Plan",
+        name: "Sarah Connor",
+        company: "TechCorp",
+        email: "sarah@gmail.com",
+        phone: "6248763865",
+        plan: "Premium",
       },
     ],
   },
-
   {
     id: 2,
     stage: "Contacted",
     count: 8,
-
     leads: [
       {
         id: 201,
@@ -37,25 +33,22 @@ export const leadsData = [
         company: "Construction",
         email: "Sandy@gmail.com",
         phone: "6248763864",
-        plan: "Basic Plan",
+        plan: "Basic",
       },
-
       {
         id: 202,
-        name: "Marcus Tate",
-        company: "Construction",
-        email: "Sandy@gmail.com",
-        phone: "6248763864",
-        plan: "Basic Plan",
+        name: "John Smith",
+        company: "BuildCo",
+        email: "john@gmail.com",
+        phone: "6248763866",
+        plan: "Advance",
       },
     ],
   },
-
   {
     id: 3,
     stage: "Qualified",
     count: 6,
-
     leads: [
       {
         id: 301,
@@ -63,25 +56,22 @@ export const leadsData = [
         company: "Construction",
         email: "Sandy@gmail.com",
         phone: "6248763864",
-        plan: "Basic Plan",
+        plan: "Premium",
       },
-
       {
         id: 302,
-        name: "Marcus Tate",
-        company: "Construction",
-        email: "Sandy@gmail.com",
-        phone: "6248763864",
-        plan: "Basic Plan",
+        name: "Emily Rose",
+        company: "DesignHub",
+        email: "emily@gmail.com",
+        phone: "6248763867",
+        plan: "Basic",
       },
     ],
   },
-
   {
     id: 4,
     stage: "Proposal",
     count: 4,
-
     leads: [
       {
         id: 401,
@@ -89,25 +79,22 @@ export const leadsData = [
         company: "Construction",
         email: "Sandy@gmail.com",
         phone: "6248763864",
-        plan: "Basic Plan",
+        plan: "Advance",
       },
-
       {
         id: 402,
-        name: "Marcus Tate",
-        company: "Construction",
-        email: "Sandy@gmail.com",
-        phone: "6248763864",
-        plan: "Basic Plan",
+        name: "Lisa Park",
+        company: "StartupX",
+        email: "lisa@gmail.com",
+        phone: "6248763868",
+        plan: "Premium",
       },
     ],
   },
-
   {
     id: 5,
     stage: "Won",
     count: 3,
-
     leads: [
       {
         id: 501,
@@ -115,16 +102,15 @@ export const leadsData = [
         company: "Construction",
         email: "Sandy@gmail.com",
         phone: "6248763864",
-        plan: "Basic Plan",
+        plan: "Basic",
       },
-
       {
         id: 502,
-        name: "Marcus Tate",
-        company: "Construction",
-        email: "Sandy@gmail.com",
-        phone: "6248763864",
-        plan: "Basic Plan",
+        name: "David Kim",
+        company: "FinanceGroup",
+        email: "david@gmail.com",
+        phone: "6248763869",
+        plan: "Advance",
       },
     ],
   },

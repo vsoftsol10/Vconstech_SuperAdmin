@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 
@@ -24,20 +23,7 @@ const DashboardLayout = ({ children }) => {
 
         {/* Main Content */}
         <main className="p-3 md:p-4">
-
-          {/* White Container */}
-          <div
-            className="
-              bg-white
-              rounded-[24px]
-              min-h-[calc(100vh-110px)]
-              p-3 md:p-4 lg:p-5
-              shadow-sm
-            "
-          >
-            {children}
-          </div>
-
+          {children}
         </main>
 
       </div>
