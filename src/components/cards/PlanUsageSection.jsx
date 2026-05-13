@@ -10,7 +10,7 @@ const plans = [
 
 const chartData = [
   { name: "Email",     value: 31, color: "#F5D547" },
-  { name: "Fax",       value: 8,  color: "#4F6BED" },
+  { name: "Website",   value: 8,  color: "#4F6BED" },
   { name: "Linked In", value: 45, color: "#1DB954" },
   { name: "Instagram", value: 16, color: "#FF4D6D" },
 ];
@@ -57,10 +57,7 @@ const PlanUsageSection = () => {
           <div>
             <h2 className="text-[16px] sm:text-[18px] font-semibold text-[#111111]">
               Plan Usage
-            </h2>
-            <p className="text-xs sm:text-sm text-gray-400 mt-1">
-              Free Plan
-            </p>
+            </h2>            
           </div>
           <button className="
             border border-gray-200 text-gray-400

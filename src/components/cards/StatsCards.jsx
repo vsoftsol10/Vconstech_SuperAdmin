@@ -40,7 +40,7 @@ const StatsCards = () => {
           className="
             relative bg-white
             border border-gray-200
-            rounded-2xl p-4
+            rounded-2xl p-4 md:p-5
             shadow-sm hover:shadow-xl
             hover:border-[#F5C518]
             transition-all duration-300
@@ -49,42 +49,42 @@ const StatsCards = () => {
         >
 
           {/* Top */}
-          <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center justify-between mb-4 md:mb-5">
             <span className="
-              text-[12px] sm:text-[13px] md:text-[14px]
+              text-[13px] sm:text-[14px] md:text-[15px]
               font-medium text-gray-500 leading-tight
             ">
               {card.title}
             </span>
 
             <div className="
-              w-[32px] sm:w-[34px] md:w-[36px]
-              h-[32px] sm:h-[34px] md:h-[36px]
+              w-[36px] sm:w-[38px] md:w-[40px]
+              h-[36px] sm:h-[38px] md:h-[40px]
               rounded-full bg-yellow-50
               flex items-center justify-center
               shrink-0 ml-2
             ">
-              <FiUsers className="text-[#F5C518] text-sm sm:text-base" />
+              <FiUsers className="text-[#F5C518] text-base sm:text-lg" />
             </div>
           </div>
 
-          {/* Number — smaller */}
+          {/* Number — reduced size only */}
           <h2 className="
-            text-[22px] sm:text-[26px] md:text-[28px]
+            text-[22px] sm:text-[24px] md:text-[26px]
             font-extrabold text-[#111111]
             leading-none tracking-tight
-            mb-3
+            mb-4 md:mb-5
           ">
             {card.value}
           </h2>
 
           {/* Bottom */}
           <div className="flex items-center justify-between gap-2">
-            <span className="text-[11px] sm:text-[12px] text-gray-400">
+            <span className="text-[11px] sm:text-[12px] md:text-[13px] text-gray-400">
               {card.subtitle}
             </span>
 
-            {/* Growth Badge — smaller */}
+            {/* Growth Badge */}
             <div className="
               flex items-center gap-0.5
               px-1.5 py-0.5

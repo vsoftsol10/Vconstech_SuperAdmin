@@ -8,11 +8,11 @@ import DashboardLayout from "./components/layout/DashboardLayout";
 
 import Dashboard from "./pages/Dashboard";
 import LeadSales from "./pages/LeadSales";
+import CustomerPage from "./pages/CustomerPage";
 
 function App() {
   return (
     <BrowserRouter>
-
       <Routes>
 
         {/* Dashboard */}
@@ -35,8 +35,17 @@ function App() {
           }
         />
 
-      </Routes>
+        {/* Customer */}
+        <Route
+          path="/customer"
+          element={
+            <DashboardLayout>
+              <CustomerPage />
+            </DashboardLayout>
+          }
+        />
 
+      </Routes>
     </BrowserRouter>
   );
 }

@@ -35,7 +35,7 @@ const LeadSales = () => {
     <div className="space-y-6">
 
       <div>
-        <h1 className="text-[32px] font-bold text-[#111111]">Lead</h1>
+        <h1 className="text-[32px] font-bold text-[#111111]">Lead & Sales</h1>
       </div>
 
       <LeadStatsSection />
