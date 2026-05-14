@@ -51,7 +51,7 @@ const LeadStatsCard = ({
       {/* Number — smaller */}
       <h2 className="
         text-[22px] sm:text-[26px] md:text-[28px]
-        font-extrabold text-[#111111]
+        font-bold text-[#111111]
         leading-none tracking-tight
         mb-3
       ">

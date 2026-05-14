@@ -71,7 +71,7 @@ const StatsCards = () => {
           {/* Number — reduced size only */}
           <h2 className="
             text-[22px] sm:text-[24px] md:text-[26px]
-            font-extrabold text-[#111111]
+            font-bold text-[#111111]
             leading-none tracking-tight
             mb-4 md:mb-5
           ">
